@@ -191,7 +191,7 @@
     <None Include="Resources\crypto_info_bg.png.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\crypto_info_bg.png" />
+    <Resource Include="Resources\crypto_info_bg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
