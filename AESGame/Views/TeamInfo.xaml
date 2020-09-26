@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="AESGame.Views.TeamInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AESGame.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Image Source="/Resources/crypto_info_bg.png" Stretch="Fill" Margin="-60">
+            <Image.Effect>
+                <BlurEffect KernelType="Gaussian" Radius="10" />
+            </Image.Effect>
+        </Image>
+        <Border CornerRadius="60" Margin="30" Background="#7F000000">
+            <Grid x:Name="TeamInfo_List" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle Height="120" Margin="20" Fill="#FFE7E7E7" RadiusX="10" RadiusY="10">
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="White" RenderingBias="Quality" ShadowDepth="1" />
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Grid Margin="25" Height="120">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="1. Song Vĩ - MSSV: 1811061712" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Top"/>
+                        <TextBlock Text="2. Bảo Bo - MSSV: 0" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
+                        <TextBlock Text="3. Hoàng Tình - MSSV: 0" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

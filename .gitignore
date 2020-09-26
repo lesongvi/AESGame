@@ -1,0 +1,4 @@
+packages/*
+AESGame/obj/*
+AESGame/bin/*
+.vs

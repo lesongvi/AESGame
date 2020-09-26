@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="AESGame.Views.AESFile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AESGame.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="580" Height="420">
+                <Grid Background="#FFE7E7E7" Margin="20 50 20 25">
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{ Binding ElementName=DataUsage }"/>
+                    </Grid.OpacityMask>
+                    <Border Background="#FFE7E7E7" x:Name="DataUsage" CornerRadius="5" />
+                    <StackPanel VerticalAlignment="Bottom">
+                        <TextBlock Text="Dữ liệu" Margin="10 0" Foreground="gray" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal" Margin="20 5">
+                            <materialDesign:PackIcon Kind="ArrowUp" Foreground="CornflowerBlue" VerticalAlignment="Center" />
+                            <TextBlock Text="0%" x:Name="percent" Foreground="gray" FontSize="15"/>
+                            <TextBlock Text="Bạn đã mã hóa 0 file trong tổng số 0 lần" x:Name="TextDownNotice" Margin="20 0" Foreground="gray" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 5">
+                            <materialDesign:PackIcon Kind="DateRange" Foreground="Gray" VerticalAlignment="Center"/>
+                            <TextBlock Text="Lượt sử dụng của bạn được reset mỗi 24h" Margin="5 0" Foreground="Gray" FontSize="15"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            <Grid Margin="50 50 50 95">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Label Grid.Column="0" Content="File cần mã hóa" Margin="5"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.ColumnSpan="2" Background="#FF93C8C0" CornerRadius="15">
+                            <TextBox Name="AESFilePath" Margin="5" BorderBrush="Black" IsReadOnly="True"/>
+                        </Border>
+                        <Button Grid.Column="2" Width="120" Click="Button_Click">
+                            <Grid Width="70">
+                                <TextBlock Text="Browse" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Label Grid.Column="0" Content="Salt" Margin="5"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Border Grid.Column="1" Background="#FF93C8C0" CornerRadius="15">
+                            <TextBox Name="Salt" Margin="5" BorderBrush="Black"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Kết quả" Margin="5"/>
+                    <Border Grid.Row="1"  Background="#FF9EC893" CornerRadius="15">
+                        <TextBox Name="AESResults" Margin="5" BorderBrush="Black" IsReadOnly="True"/>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Width="200" Click="AESStringEncrypt_OnClick">
+                        <Grid Width="150">
+                            <materialDesign:PackIcon Kind="LockAlert" VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" Text="Mã hóa" />
+                        </Grid>
+                    </Button>
+
+                    <Button Grid.Column="1" Width="200" Click="AESStringDecrypt_OnClick">
+                        <Grid Width="150">
+                            <materialDesign:PackIcon Kind="FreeBreakfast" VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" Text="Giải mã" />
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
