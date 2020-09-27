@@ -123,7 +123,7 @@ namespace AESGame.Views
             usage = usageCheck.initData();
 
             TextDownNotice.Text = "Bạn đã mã hóa " + usage.file_usage + " file trong tổng số " + usage.total_usage + " lần";
-            percent.Text = ((double) (usage.file_usage / config.limitAESFile) * 100) + "%";
+            percent.Text = Math.Round(((double) usage.file_usage / usage.total_usage * 100), 2) + "%";
         }
     }
 }

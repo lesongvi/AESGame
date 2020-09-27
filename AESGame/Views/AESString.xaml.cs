@@ -55,7 +55,7 @@ namespace AESGame.Views
             usage = usageCheck.initData();
 
             TextDownNotice.Text = "Bạn đã mã hóa " + usage.string_usage + " chuỗi trong tổng số " + usage.total_usage + " lần";
-            percent.Text = ((double) (usage.string_usage / config.limitAESString) * 100) + "%";
+            percent.Text = Math.Round(((double)usage.string_usage / usage.total_usage * 100), 2) + "%";
         }
 
         //vi, 111111111111111111111111, hZTbU6PNwgTcdwSqFaysgg==

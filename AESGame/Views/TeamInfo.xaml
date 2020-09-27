@@ -22,8 +22,8 @@
                 <Grid Margin="25" Height="120">
                     <StackPanel Margin="20">
                         <TextBlock Text="1. Song Vĩ - MSSV: 1811061712" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Top"/>
-                        <TextBlock Text="2. Bảo Bo - MSSV: 0" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-                        <TextBlock Text="3. Hoàng Tình - MSSV: 0" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="2. Bảo Bo - MSSV: 18..." HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
+                        <TextBlock Text="3. Hoàng Tình - MSSV: 19..." HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Bottom"/>
                     </StackPanel>
                 </Grid>
             </Grid>

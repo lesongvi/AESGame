@@ -188,9 +188,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\crypto_info_bg.png.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\crypto_info_bg.png" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,6 @@ namespace AESGame.Models
     public class DataUsageCheck
     {
         string pcIp = new System.Net.WebClient().DownloadString("https://api.ipify.org");
-        UsageDetail usage;
         public int AESStringUsage 
         {
             set;
