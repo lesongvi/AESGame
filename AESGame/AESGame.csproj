@@ -58,6 +58,12 @@
     <Reference Include="De.TorstenMandelkow.MetroChart, Version=0.9.5818.20693, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernUICharts.WPF.Beta.0.9.1\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.7.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.7\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -68,6 +74,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -78,6 +85,7 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -97,6 +105,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\IStartupLoader.cs" />
+    <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\NotifyChangedBase.cs" />
+    <Compile Include="Common\Paths.cs" />
+    <Compile Include="CustomDialogManager.cs" />
+    <Compile Include="IThemeSetter.cs" />
     <Compile Include="Models\AESCryptOptions.cs" />
     <Compile Include="Models\AESPasswordHash.cs" />
     <Compile Include="Models\AESStringEngine.cs" />
@@ -105,14 +119,30 @@
     <Compile Include="Models\SimpleConverter.cs" />
     <Compile Include="Models\UsageDetail.cs" />
     <Compile Include="Models\VConfig.cs" />
+    <Compile Include="TemporaryStartupLoadingControl.xaml.cs">
+      <DependentUpon>TemporaryStartupLoadingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeSetterManager.cs" />
+    <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Models\LoadProgress.cs" />
+    <Compile Include="ViewModels\StartupLoadingVM.cs" />
     <Compile Include="Views\AESFile.xaml.cs">
       <DependentUpon>AESFile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AESString.xaml.cs">
       <DependentUpon>AESString.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Base\BaseDialogWindow.cs" />
+    <Compile Include="Views\Base\BaseDialogWindow.Sizing.cs" />
+    <Compile Include="Views\Base\MainWin.cs" />
+    <Compile Include="Views\Base\Utils\NativeUtils.cs" />
+    <Compile Include="Views\Base\Utils\SystemHelper.cs" />
+    <Compile Include="Views\Common\CustomDialog.xaml.cs">
+      <DependentUpon>CustomDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\WindowUtils.cs" />
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -131,11 +161,175 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Xaml\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Colors\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Colors\Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Colors\Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\Buttons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\CheckBoxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\ComboBoxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\Controls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\InvisibleToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\MenuDropdownButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\ProgressBars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\SpinCirclePath.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\StartStopButtonDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\StartStopButtonLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\Switches.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\TabButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\TextBoxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Controls\ToolTip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Fonts\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Fonts\Spacing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Fonts\Typography.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\LoginCircleLogoDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\LoginCircleLogoLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\LoginQRCircleLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\MiningAxeIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\MiningAxeIconDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\MoonCircleDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\ViLogoBigLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\ViLogoDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\ViLogoLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\QRIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\QrIconDefault.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Icons\SunCircleLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\ViLogos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Xaml\Tooltips.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TemporaryStartupLoadingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AESFile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AESString.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Base\ViMainBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Base\ViWinBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Common\CustomDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +365,32 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Fonts\FontAwesome\fa-brands-400.eot" />
+    <Resource Include="Resources\Fonts\FontAwesome\fa-brands-400.ttf" />
+    <None Include="Resources\Fonts\FontAwesome\fa-brands-400.woff" />
+    <None Include="Resources\Fonts\FontAwesome\fa-brands-400.woff2" />
+    <None Include="Resources\Fonts\FontAwesome\fa-regular-400.eot" />
+    <Resource Include="Resources\Fonts\FontAwesome\fa-regular-400.ttf" />
+    <None Include="Resources\Fonts\FontAwesome\fa-regular-400.woff" />
+    <None Include="Resources\Fonts\FontAwesome\fa-regular-400.woff2" />
+    <None Include="Resources\Fonts\FontAwesome\fa-solid-900.eot" />
+    <Resource Include="Resources\Fonts\FontAwesome\fa-solid-900.ttf" />
+    <None Include="Resources\Fonts\FontAwesome\fa-solid-900.woff" />
+    <None Include="Resources\Fonts\FontAwesome\fa-solid-900.woff2" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-B.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-BI.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-C.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-L.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-LI.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-M.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-MI.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-R.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-RI.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\Ubuntu-Th.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\UbuntuMono-B.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\UbuntuMono-BI.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\UbuntuMono-R.ttf" />
+    <Resource Include="Resources\Fonts\Ubuntu\UbuntuMono-RI.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -196,6 +416,22 @@
   <ItemGroup>
     <Resource Include="imageedit_1_6417371218.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Fonts\FontAwesome\fa-brands-400.svg" />
+    <Content Include="Resources\Fonts\FontAwesome\fa-regular-400.svg" />
+    <Resource Include="Resources\Fonts\FontAwesome\LICENSE.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\CONTRIBUTING.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\copyright.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\FONTLOG.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\LICENCE-FAQ.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\LICENCE.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\README.txt" />
+    <Resource Include="Resources\Fonts\Ubuntu\TRADEMARKS.txt" />
+    <Resource Include="Resources\logo.ico" />
+    <Resource Include="Resources\logoDark32.png" />
+    <Resource Include="Resources\logoLight32.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AESGame.Models;
+using AESGame.Views.Common;
 using Newtonsoft.Json;
 
 namespace AESGame.Views
@@ -41,7 +42,6 @@ namespace AESGame.Views
         {
             ThreadPool.QueueUserWorkItem(_ =>
             {
-                //Longer Process (//set the operation in another thread so that the UI thread is kept responding)
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     this.reloadData();
@@ -65,7 +65,14 @@ namespace AESGame.Views
             var text = AESEncryptText.Text;
             if (Salt.Text.Length != 16 && Salt.Text.Length != 24 && Salt.Text.Length != 32)
             {
-                MessageBox.Show("Salt phải là 16 bit, 24 bit hoặc 32 bit!");
+                var errorMessageShow = new CustomDialog()
+                {
+                    Title = "Lỗi!",
+                    Description = "Salt phải là 16 bit, 24 bit hoặc 32 bit!",
+                    OkText = "Được",
+                    AnimationVisible = Visibility.Collapsed
+                };
+                CustomDialogManager.ShowModalDialog(errorMessageShow);
                 return;
             }
             aesStringInstance = new AESStringEngine(Salt.Text, config.IVKey);
@@ -78,14 +85,28 @@ namespace AESGame.Views
                     this.reloadData();
                 } else
                 {
-                    MessageBox.Show("Bạn đã đạt giới hạn!");
+                    var errorMessageShow = new CustomDialog()
+                    {
+                        Title = "Lỗi!",
+                        Description = "Bạn đã đạt giới hạn!",
+                        OkText = "Được",
+                        AnimationVisible = Visibility.Collapsed
+                    };
+                    CustomDialogManager.ShowModalDialog(errorMessageShow);
                 }
                 //usageCheck = 100;
                 //usageCheck.SaveUserSettings();
             } catch (Exception err)
             {
                 AESResults.Text = "";
-                MessageBox.Show("Lỗi! Chi tiết lỗi: " + err);
+                var errorMessageShow = new CustomDialog()
+                {
+                    Title = "Lỗi!",
+                    Description = "Chi tiết lỗi: " + err,
+                    OkText = "Được",
+                    AnimationVisible = Visibility.Collapsed
+                };
+                CustomDialogManager.ShowModalDialog(errorMessageShow);
             }
         }
 
@@ -94,7 +115,14 @@ namespace AESGame.Views
             var text = AESEncryptText.Text;
             if (Salt.Text.Length != 16 && Salt.Text.Length != 24 && Salt.Text.Length != 32)
             {
-                MessageBox.Show("Salt phải là 16 bit, 24 bit hoặc 32 bit!");
+                var errorMessageShow = new CustomDialog()
+                {
+                    Title = "Lỗi!",
+                    Description = "Salt phải là 16 bit, 24 bit hoặc 32 bit!",
+                    OkText = "Được",
+                    AnimationVisible = Visibility.Collapsed
+                };
+                CustomDialogManager.ShowModalDialog(errorMessageShow);
                 return;
             }
             aesStringInstance = new AESStringEngine(Salt.Text, config.IVKey);
@@ -106,7 +134,14 @@ namespace AESGame.Views
             } catch(Exception err)
             {
                 AESResults.Text = "";
-                MessageBox.Show("Lỗi! Chi tiết lỗi: " + err);
+                var errorMessageShow = new CustomDialog()
+                {
+                    Title = "Lỗi!",
+                    Description = "Chi tiết lỗi: " + err,
+                    OkText = "Được",
+                    AnimationVisible = Visibility.Collapsed
+                };
+                CustomDialogManager.ShowModalDialog(errorMessageShow);
             }
         }
     }

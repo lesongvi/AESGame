@@ -38,8 +38,6 @@ namespace AESGame.ViewModels
             }
         }
 
-        DataUsageCheck usageCheck;
-
         public MainWindowViewModel()
         {
             SwitchView = 0;

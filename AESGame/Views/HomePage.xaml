@@ -7,8 +7,123 @@
              xmlns:local="clr-namespace:AESGame.Views"
              xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Style TargetType="Button" x:Key="local.CompleteCredentialsButton" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border
+                                x:Name="Chrome"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Margin="0"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="{TemplateBinding Padding}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="{StaticResource UbuntuFontFamily }"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColorBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontStretch" Value="Normal" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+
+            <Setter Property="BorderBrush" Value="#eeeeee" />
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="{StaticResource Brushes.Gradient}"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        <!--#region Dashboard styles -->
+        <!--devices circle count labels-->
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.DevicesTypeCountText" >
+            <Setter Property= "FontFamily" Value="{StaticResource Ubuntu-Bold}"/>
+            <Setter Property= "FontSize" Value="40"/>
+            <Setter Property= "FontWeight" Value="Bold"/>
+            <Setter Property= "FontStyle" Value="Normal"/>
+            <Setter Property= "FontStretch" Value="Normal"/>
+            <Setter Property= "LineHeight" Value="0.8"/>
+            <Setter Property= "HorizontalAlignment" Value="Center"/>
+            <Setter Property= "Foreground" Value="{DynamicResource TextColorBrush}"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.DevicesTypeLabelText">
+            <Setter Property= "FontFamily" Value="{StaticResource Ubuntu-Bold}"/>
+            <Setter Property= "FontSize" Value="12"/>
+            <Setter Property= "FontWeight" Value="Bold"/>
+            <Setter Property= "FontStyle" Value="Normal"/>
+            <Setter Property= "FontStretch" Value="Normal"/>
+            <Setter Property= "LineHeight" Value="1.5"/>
+            <Setter Property= "HorizontalAlignment" Value="Center"/>
+            <Setter Property= "Foreground" Value="{StaticResource Gray2ColorBrush}"/>
+        </Style>
+        <!--stats-->
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsTitleText">
+            <Setter Property= "FontFamily" Value="{StaticResource Ubuntu-Medium}"/>
+            <Setter Property= "FontStyle" Value="Normal"/>
+            <Setter Property= "FontStretch" Value="Normal"/>
+            <Setter Property= "FontWeight" Value="500"/>
+            <Setter Property= "LineHeight" Value="2"/>
+            <Setter Property= "FontSize" Value="10"/>
+            <Setter Property= "Foreground" Value="{StaticResource Gray1ColorBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsBTCValueText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
+            <Setter Property= "FontSize" Value="18"/>
+            <Setter Property= "Foreground" Value="{DynamicResource TextColorBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsBTCLabelText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
+            <Setter Property= "FontSize" Value="12"/>
+            <Setter Property= "Foreground" Value="{DynamicResource TextColorBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsFiatEstimateText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
+            <Setter Property= "FontSize" Value="12"/>
+            <Setter Property= "Foreground" Value="{StaticResource Gray2ColorBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.Complete.your.mining.setup">
+            <Setter Property= "FontFamily" Value="{StaticResource Ubuntu-Bold}"/>
+            <Setter Property= "FontSize" Value="12"/>
+            <Setter Property= "FontWeight" Value="Bold"/>
+            <Setter Property= "FontStretch" Value="Normal"/>
+            <Setter Property= "FontStyle" Value="Normal"/>
+            <Setter Property= "LineHeight" Value="1.5"/>
+            <Setter Property= "Foreground" Value="{StaticResource Gray2ColorBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <!--#endregion Dashboard styles -->
+    </UserControl.Resources>
+    <Grid Background="{DynamicResource BackgroundColor}" Height="Auto" Width="Auto" Margin="40,0,40,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="200" />
             <RowDefinition Height="*" />
@@ -19,7 +134,7 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        
+
         <Grid Grid.Column="0">
             <Rectangle Height="120" Margin="20" Fill="#FFE7E7E7" RadiusX="10" RadiusY="10" Cursor="Hand">
                 <Rectangle.Effect>
@@ -95,7 +210,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="580" Height="380">
-            <Grid Background="#FFE7E7E7" Margin="20 50 20 25">
+            <Grid Background="#FFE7E7E7" Margin="20 50 20 60">
                 <Grid.OpacityMask>
                     <VisualBrush Visual="{ Binding ElementName=DataUsage }"/>
                 </Grid.OpacityMask>
@@ -105,10 +220,6 @@
                     <StackPanel Orientation="Horizontal" Margin="20 5">
                         <materialDesign:PackIcon Kind="ArrowUp" Foreground="CornflowerBlue" VerticalAlignment="Center" />
                         <TextBlock Text="Bạn đã mã hóa 0 chuỗi và 0 file" x:Name="totalUseDesc" Margin="10 0" Foreground="gray" FontSize="15"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10 5">
-                        <materialDesign:PackIcon Kind="DateRange" Foreground="Gray" VerticalAlignment="Center"/>
-                        <TextBlock Text="Lượt sử dụng của bạn được reset mỗi 24h" Margin="5 0" Foreground="Gray" FontSize="15"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -129,6 +240,15 @@
                 </MetroChart:RadialGaugeChart>
             </Grid>
 
+        </Grid>
+
+        <Grid x:Name="LayoutRootOverlay" Grid.RowSpan="4" Panel.ZIndex="1" Visibility="Collapsed">
+            <!--<Grid x:Name="MODAL_WINDOW_BLUR" Background="{DynamicResource MODAL_WINDOW_BLUR_Background}" Opacity="0.8" />-->
+            <Grid x:Name="MODAL_WINDOW_ContentGrid" Width="Auto" Height="Auto" Background="Transparent">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ContentPresenter x:Name="MODAL_DIALOG" Grid.Row="1"/>
+                </ScrollViewer>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

@@ -7,8 +7,168 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseUbuntuTextBlock}" x:Key="local.SettingTitle">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="{StaticResource Gray1ColorBrush}" />
+        </Style>
+
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseUbuntuTextBlock}" x:Key="local.SettingDetail">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource TextColorBrush}" />
+        </Style>
+
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="40,16,0,16">
+            <WrapPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource BaseUbuntuTextBlock}" Foreground="{DynamicResource TextColorBrush}" FontSize="14">Mã hóa file:</TextBlock>
+                <Button Margin="4,0,0,0" Style="{StaticResource ButtonNoBorder}">
+                    <Button.ContextMenu>
+                        <ContextMenu x:Name="AESStringPage">
+                            <ContextMenu.Template>
+                                <ControlTemplate>
+                                    <StackPanel>
+                                        <Grid >
+                                            <Border Background="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" CornerRadius="4" />
+                                            <StackPanel>
+                                                <Button Padding="16,7,16,7" Style="{StaticResource ContextMenuButton}"/>
+                                                <Separator Background="{DynamicResource BorderColor}"/>
+                                                <Button Padding="16,7,16,7" Style="{StaticResource ContextMenuButton}"/>
+                                                <Separator Background="{DynamicResource BorderColor}"/>
+                                                <Button Padding="16,7,16,7" Style="{StaticResource ContextMenuButton}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </ContextMenu.Template>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                    <TextBlock Foreground="{StaticResource PrimaryColorBrush}" FontSize="14" LineHeight="1.57">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
+                                <Style.Triggers>
+                                    <Trigger Property ="IsMouseOver" Value="True">
+                                        <Setter Property="TextDecorations">
+                                            <Setter.Value>
+                                                <TextDecorationCollection>
+                                                    <TextDecoration Location="Underline" PenOffset="2">
+                                                        <TextDecoration.Pen>
+                                                            <Pen Thickness="1" Brush="{StaticResource PrimaryColorBrush}"></Pen>
+                                                        </TextDecoration.Pen>
+                                                    </TextDecoration>
+                                                </TextDecorationCollection>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Button>
+            </WrapPanel>
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.ColumnSpan="2" Width="Auto" Name="AESFilePath" Margin="30 5 10 5" Style="{StaticResource inputBox}" BorderBrush="Black" IsReadOnly="True"/>
+                        <Button Grid.Column="2" Click="Button_Click" Margin="10 0 30 0" Height="40" Style="{StaticResource BigButtonWhite}">
+                            <Grid Width="70">
+                                <TextBlock Text="Browse" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Margin="30 0 0 0" VerticalAlignment="Top">
+                        <TextBlock Style="{StaticResource local.SettingTitle}" Text="Salt input " />
+                        <TextBlock Style="{StaticResource local.SettingDetail}" Text="Nhập khóa salt" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <TextBox Grid.Row="1" Width="Auto" Name="Salt" Style="{StaticResource inputBox}" Margin="30 0 30 5" BorderBrush="Black"/>
+                </Grid>
+                <TextBox Height="Auto" Width="Auto" Name="AESResults" Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="2" TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource inputBox}" Margin="30 0" BorderBrush="Black"/>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="2" MinHeight="88" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Grid.Row="0" Grid.Column="1"
+                Grid.RowSpan="2"
+                Style="{StaticResource BigButtonPrimary}"
+                Width="174"
+                Height="40"
+                Margin="0,0,40,0"
+                IsEnabled="True"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="MÃ HÓA"
+                Click="AESStringEncrypt_OnClick"
+                />
+
+            <Button 
+                Grid.Row="0" Grid.Column="3"
+                Grid.RowSpan="2"
+                Style="{StaticResource BigButtonPrimary}"
+                Width="174"
+                Height="40"
+                Margin="0,0,40,0"
+                IsEnabled="True"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="GIẢI MÃ"
+                Click="AESStringDecrypt_OnClick"
+                />
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="20 5" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="ArrowUp" Foreground="CornflowerBlue" VerticalAlignment="Center" />
+                <TextBlock Foreground="{StaticResource NastyGreenBrush}" Style="{StaticResource BaseUbuntuTextBlockBold}" Text="0%" x:Name="percent" FontSize="15"/>
+                <TextBlock Foreground="{StaticResource NastyGreenBrush}" Style="{StaticResource BaseUbuntuTextBlockBold}" Text="Bạn đã mã hóa 0 file trong tổng số 0 lần" x:Name="TextDownNotice" Margin="20 0" FontSize="15"/>
+            </StackPanel>
+
+        </Grid>
+
+        <!--<Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -123,6 +283,6 @@
                     </Button>
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

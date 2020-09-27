@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AESGame.Models;
+using AESGame.Views.Base;
 
 namespace AESGame.Views
 {
@@ -42,7 +43,6 @@ namespace AESGame.Views
         {
             ThreadPool.QueueUserWorkItem(_ =>
             {
-                //Longer Process (//set the operation in another thread so that the UI thread is kept responding)
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     this.reloadData();
@@ -84,7 +84,7 @@ namespace AESGame.Views
 
             private double CalculatePercentUsage(UsageDetail u)
             {
-                return ((double)u.string_usage / u.total_usage * 100);
+                return u.total_usage > .0 ? ((double)u.string_usage / u.total_usage * 100) : 0;
             }
         }
     }

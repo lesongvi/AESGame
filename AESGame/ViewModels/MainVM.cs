@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AESGame.Common;
 using AESGame.Models;
 
 namespace AESGame.ViewModels
@@ -15,6 +16,11 @@ namespace AESGame.ViewModels
         {
             usageCheck = new DataUsageCheck();
             usageCheck.initData();
+        }
+
+        public async Task InitializeAESEngine(IStartupLoader sl)
+        {
+            //Silent is golden
         }
     }
 }

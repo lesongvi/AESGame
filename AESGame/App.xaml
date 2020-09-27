@@ -6,11 +6,149 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="Resources/Xaml/Colors/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Xaml/Controls/Controls.xaml"/>
+                <ResourceDictionary Source="Resources/Xaml/Brushes.xaml"/>
+                <ResourceDictionary Source="Resources/Xaml/Fonts/Fonts.xaml"/>
+                <ResourceDictionary Source="Resources/Xaml/ViLogos.xaml"/>
+                <ResourceDictionary Source="Views/Base/ViMainBase.xaml"/>
+                <ResourceDictionary Source="Views/Base/ViWinBase.xaml"/>
+                <ResourceDictionary Source="Resources/Xaml/Tooltips.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DrawingBrush x:Key="ViLogo" Drawing="{DynamicResource ViLogoLight}" />
+            <DrawingBrush x:Key="ViBigLogo" Drawing="{DynamicResource ViLogoBigLight}" />
+
+            <DrawingBrush x:Key="QrLightLogo" Drawing="{DynamicResource QrIconDefault}" />
+            <DrawingBrush x:Key="QrDarkLogo" Drawing="{DynamicResource QRIcon}" />
+
+
+            <DrawingBrush x:Key="LoginCircle" Drawing="{DynamicResource LoginCircleLogoLight}" />
+            <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource ViMainBase}"/>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="BaseUbuntuTextBlock">
+                <Setter Property= "FontFamily" Value="{StaticResource UbuntuFontFamily}"/>
+                <Setter Property= "FontStyle" Value="Normal"/>
+                <Setter Property= "FontStretch" Value="Normal"/>
+                <Setter Property= "FontWeight" Value="Normal"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="BaseUbuntuTextBlockBold" BasedOn="{StaticResource BaseUbuntuTextBlock}">
+                <Setter Property= "FontWeight" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="BaseUbuntuTextBlockMedium" BasedOn="{StaticResource BaseUbuntuTextBlock}">
+                <Setter Property= "FontWeight" Value="Medium"/>
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="InfoIcon" >
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontStyle" Value="Normal" />
+                <Setter Property="FontStretch" Value="Normal" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Text" Value="&#xF05A;" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="CheckIcon" >
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontStyle" Value="Normal" />
+                <Setter Property="FontStretch" Value="Normal" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{StaticResource SuccessBgColorBrush}" />
+                <Setter Property="Text" Value="&#xf00c;" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="AlertIcon" >
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontStyle" Value="Normal" />
+                <Setter Property="FontStretch" Value="Normal" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{StaticResource RedDangerColorBrush}" />
+                <Setter Property="Text" Value="&#xf071;" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="{x:Type ButtonBase}" x:Key="WindowButtonStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                            <Border
+                            x:Name="Chrome"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Margin="0"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                <ContentPresenter
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
+                <Setter Property="FontSize" Value="13.333" />
+                <Setter Property="Foreground" Value="#CECDCD" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="#FBA342" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type ButtonBase}" x:Key="minimizeWindowStyle">
+                <Setter Property="Content" Value="&#xf2d1;" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <Style BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type ButtonBase}" x:Key="closeWindowStyle">
+                <Setter Property="Content" Value="&#xf00d;" />
+                <Setter Property="FontSize" Value="24" />
+            </Style>
+
+            <Style BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type ToggleButton}" x:Key="bellWindowStyle">
+                <Setter Property="Content" Value="&#xf0f3;" />
+                <Setter Property="FontSize" Value="22" />
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource PrimaryColorBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type ToggleButton}" x:Key="infoWindowStyle">
+                <Setter Property="Content" Value="&#xf05a;" />
+                <Setter Property="FontSize" Value="22" />
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource PrimaryColorBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <Style BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type ToggleButton}" x:Key="settingsWindowStyle">
+                <Setter Property="Content" Value="&#xf013;" />
+                <Setter Property="FontSize" Value="22" />
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource PrimaryColorBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
