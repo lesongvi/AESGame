@@ -24,6 +24,8 @@ namespace AESGame.Views
     /// </summary>
     public partial class AESString : UserControl
     {
+        //vi, 111111111111111111111111, hZTbU6PNwgTcdwSqFaysgg== - for Debug
+
         AESStringEngine aesStringInstance;
         DataUsageCheck usageCheck;
         UsageDetail usage;
@@ -34,31 +36,21 @@ namespace AESGame.Views
             usageCheck = new DataUsageCheck();
             config = new VConfig();
 
-            Loaded += AESString_Loaded;
-            //this.reloadData();
-        }
-
-        void AESString_Loaded(object sender, RoutedEventArgs e)
-        {
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    this.reloadData();
-                }));
-            });
-            
-        }
-
-        private void reloadData()
-        {
             usage = usageCheck.initData();
 
-            TextDownNotice.Text = "Bạn đã mã hóa " + usage.string_usage + " chuỗi trong tổng số " + usage.total_usage + " lần";
-            percent.Text = Math.Round(((double)usage.string_usage / usage.total_usage * 100), 2) + "%";
+            DataContextChanged += AESString_DataContextChanged;
         }
 
-        //vi, 111111111111111111111111, hZTbU6PNwgTcdwSqFaysgg==
+        private void AESString_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            /*if (e.NewValue is MainVM mainVM)
+            {
+                Console.WriteLine(e.NewValue);
+                _vm = mainVM;
+                return;
+            }
+            throw new Exception("AESString_DataContextChanged " + e.NewValue  + " must be of type MainVM");*/
+        }
 
         private void AESStringEncrypt_OnClick(object sender, RoutedEventArgs e)
         {
@@ -82,7 +74,6 @@ namespace AESGame.Views
                 {
                     AESResults.Text = aesStringInstance.Encrypt(text);
                     usageCheck.AESStringDone();
-                    this.reloadData();
                 } else
                 {
                     var errorMessageShow = new CustomDialog()
@@ -94,8 +85,6 @@ namespace AESGame.Views
                     };
                     CustomDialogManager.ShowModalDialog(errorMessageShow);
                 }
-                //usageCheck = 100;
-                //usageCheck.SaveUserSettings();
             } catch (Exception err)
             {
                 AESResults.Text = "";
@@ -129,7 +118,6 @@ namespace AESGame.Views
             try
             {
                 usageCheck.AESDeStringDone();
-                this.reloadData();
                 AESResults.Text = aesStringInstance.Decrypt(text);
             } catch(Exception err)
             {

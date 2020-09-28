@@ -36,6 +36,11 @@ namespace AESGame.Models
             return JsonConvert.DeserializeObject<UsageDetail>(requestMe("summary", null));
         }
 
+        public SessionMk hashMe()
+        {
+            return JsonConvert.DeserializeObject<SessionMk>(requestMe("sessionMk", null));
+        }
+
         public UsageDetail AESStringDone()
         {
             return JsonConvert.DeserializeObject<UsageDetail>(requestMe("action", "_str"));

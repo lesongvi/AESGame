@@ -1,5 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-    
+    <system:String x:Key="viTextAbout">AESGame 1.0.0 - Mã hóa AES chuỗi, tập tin từ máy tính.</system:String>
+    <system:String x:Key="whatIsLimit">Bạn đang sử dụng gói miễn phí!</system:String>
+    <system:String x:Key="versioningCheckQuestion">Phiên bản mới nhật được release trên trang chủ!</system:String>
+    <system:String x:Key="memNum1">1. Song Vĩ - MSSV: 1811061712</system:String>
+    <system:String x:Key="memNum2">2. Bảo Bo - MSSV: 18...</system:String>
+    <system:String x:Key="memNum3">3. Hoàng Tình - MSSV: 19...</system:String>
 </ResourceDictionary>

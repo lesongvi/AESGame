@@ -25,6 +25,8 @@ namespace AESGame.Views
     /// </summary>
     public partial class AESFile : UserControl
     {
+        //E:\BMTT\Debug, 111111111111111111111111 - For debug
+
         AESStringEngine aesStringInstance;
         DataUsageCheck usageCheck;
         UsageDetail usage;
@@ -36,19 +38,20 @@ namespace AESGame.Views
             usageCheck = new DataUsageCheck();
             config = new VConfig();
 
-            Loaded += AESFile_Loaded;
+            usage = usageCheck.initData();
+
+            DataContextChanged += AESFile_DataContextChanged;
         }
 
-        void AESFile_Loaded(object sender, RoutedEventArgs e)
+        private void AESFile_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ThreadPool.QueueUserWorkItem(_ =>
+            /*if (e.NewValue is MainVM mainVM)
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    this.reloadData();
-                }));
-            });
-
+                Console.WriteLine(e.NewValue);
+                _vm = mainVM;
+                return;
+            }
+            throw new Exception("AESFile_DataContextChanged " + e.NewValue  + " must be of type MainVM");*/
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -64,8 +67,6 @@ namespace AESGame.Views
                 txtFile = File.ReadAllText(fdlg.FileName);
             }
         }
-
-        //E:\BMTT\Debug, 111111111111111111111111
 
         private void AESStringEncrypt_OnClick(object sender, RoutedEventArgs e)
         {
@@ -88,7 +89,6 @@ namespace AESGame.Views
             {
                 AESResults.Text = aesStringInstance.Encrypt(text);
                 usageCheck.AESFileDone();
-                this.reloadData();
             }
             catch (Exception err)
             {
@@ -124,8 +124,7 @@ namespace AESGame.Views
             {
                 if (usage.file_usage < config.limitAESFile)
                 {
-                    usageCheck.AESDeStringDone();
-                    this.reloadData();
+                    usageCheck.AESDeFileDone();
                     AESResults.Text = aesStringInstance.Decrypt(text);
                 } else
                 {
@@ -151,14 +150,6 @@ namespace AESGame.Views
                 };
                 CustomDialogManager.ShowModalDialog(errorMessageShow);
             }
-        }
-
-        private void reloadData()
-        {
-            usage = usageCheck.initData();
-
-            TextDownNotice.Text = "Bạn đã mã hóa " + usage.file_usage + " file trong tổng số " + usage.total_usage + " lần";
-            percent.Text = Math.Round(((double) usage.file_usage / usage.total_usage * 100), 2) + "%";
         }
     }
 }

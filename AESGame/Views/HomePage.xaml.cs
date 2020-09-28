@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AESGame.Models;
+using AESGame.ViewModels;
 using AESGame.Views.Base;
 
 namespace AESGame.Views
@@ -23,69 +24,24 @@ namespace AESGame.Views
     /// </summary>
     public partial class HomePage : UserControl
     {
-        private AESUsage encryptUsage;
-        DataUsageCheck usageCheck;
-        UsageDetail usage;
-        VConfig config;
+        private MainVM _vm;
+
         public HomePage()
         {
             InitializeComponent();
 
-            usageCheck = new DataUsageCheck();
-            config = new VConfig();
-            limitAESString.Text = "Giới hạn " + config.limitAESString + " lần";
-            limitAESFile.Text = "Giới hạn " + config.limitAESFile + " lần";
-
-            Loaded += HomePage_Loaded;
+            DataContextChanged += HomePage_DataContextChanged;
         }
 
-        void HomePage_Loaded(object sender, RoutedEventArgs e)
+        private void HomePage_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ThreadPool.QueueUserWorkItem(_ =>
+            /*if (e.NewValue is MainVM mainVM)
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    this.reloadData();
-                }));
-            });
-        }
-
-        private void reloadData()
-        {
-            usage = usageCheck.initData();
-
-            AESStringUsage.Text = usage.string_usage.ToString();
-            AESFileUsage.Text = usage.file_usage.ToString();
-            totalUseDesc.Text = "Bạn đã mã hóa " + usage.string_usage + " chuỗi và " + usage.file_usage + " file";
-            encryptUsage = new AESUsage(usage);
-            DataContext = new encryptUsageViewModel(encryptUsage);
-        }
-
-        internal class encryptUsageViewModel
-        {
-            public List<AESUsage> dataUsage { get; private set; }
-
-            public encryptUsageViewModel(AESUsage encryptUsage)
-            {
-                dataUsage = new List<AESUsage>();
-                dataUsage.Add(encryptUsage);
+                Console.WriteLine(e.NewValue);
+                _vm = mainVM;
+                return;
             }
-        }
-
-        internal class AESUsage
-        {
-            public string title { get; private set; }
-            public double percent { get; private set; }
-            public AESUsage(UsageDetail u)
-            {
-                title = "Tần suất sử dụng";
-                percent = CalculatePercentUsage(u);
-            }
-
-            private double CalculatePercentUsage(UsageDetail u)
-            {
-                return u.total_usage > .0 ? ((double)u.string_usage / u.total_usage * 100) : 0;
-            }
+            throw new Exception("HomePage_DataContextChanged " + e.NewValue  + " must be of type MainVM");*/
         }
     }
 }

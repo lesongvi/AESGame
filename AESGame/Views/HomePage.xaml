@@ -5,9 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:AESGame.Views"
+             xmlns:common="clr-namespace:AESGame.Views.Common"
+             xmlns:viewModels="clr-namespace:AESGame.ViewModels"
              xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModels:MainVM />
+    </UserControl.DataContext>
     <UserControl.Resources>
 
         <Style TargetType="Button" x:Key="local.CompleteCredentialsButton" >
@@ -81,7 +86,7 @@
             <Setter Property= "Foreground" Value="{StaticResource Gray2ColorBrush}"/>
         </Style>
         <!--stats-->
-        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsTitleText">
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.VersioningTitleText">
             <Setter Property= "FontFamily" Value="{StaticResource Ubuntu-Medium}"/>
             <Setter Property= "FontStyle" Value="Normal"/>
             <Setter Property= "FontStretch" Value="Normal"/>
@@ -92,7 +97,7 @@
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
-        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsBTCValueText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.VersioningNumText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
             <Setter Property= "FontSize" Value="18"/>
             <Setter Property= "Foreground" Value="{DynamicResource TextColorBrush}"/>
             <Setter Property="TextWrapping" Value="Wrap" />
@@ -104,7 +109,7 @@
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
-        <Style TargetType="{x:Type TextBlock}" x:Key="local.StatsFiatEstimateText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
+        <Style TargetType="{x:Type TextBlock}" x:Key="local.VersioningText" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
             <Setter Property= "FontSize" Value="12"/>
             <Setter Property= "Foreground" Value="{StaticResource Gray2ColorBrush}"/>
             <Setter Property="TextWrapping" Value="Wrap" />
@@ -121,105 +126,31 @@
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
-        <!--#endregion Dashboard styles -->
     </UserControl.Resources>
     <Grid Background="{DynamicResource BackgroundColor}" Height="Auto" Width="Auto" Margin="40,0,40,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="200" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="308*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="128*" MaxHeight="150" MinHeight="128" />
+            <RowDefinition Height="86" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <Rectangle Height="120" Margin="20" Fill="#FFE7E7E7" RadiusX="10" RadiusY="10" Cursor="Hand">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="20" Color="White" RenderingBias="Quality" ShadowDepth="1" />
-                </Rectangle.Effect>
-            </Rectangle>
-            <Grid Margin="25" Height="120">
-                <Grid Width="35" Height="50" Background="#FF2BCAAA" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#FFD7D7D7" RenderingBias="Quality" ShadowDepth="1" />
-                    </Grid.Effect>
-                    <materialDesign:PackIcon Kind="DataUsage" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
-                </Grid>
-                <TextBlock Text="Chuỗi AES" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 20">
-                    <TextBlock Text="0" x:Name="AESStringUsage" Margin="0 0 10 0" VerticalAlignment="Center" Foreground="gray" FontSize="50"/>
-                    <TextBlock Text="lần" Margin="0 5" VerticalAlignment="Bottom" Foreground="gray" FontSize="20"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20">
-                    <materialDesign:PackIcon Kind="Alert" Foreground="Red" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
-                    <TextBlock Text="Giới hạn 0 lần" x:Name="limitAESString" FontSize="8" Foreground="#FF0096FF"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Column="1">
-            <Rectangle Height="120" Margin="20" Fill="#FFE7E7E7" RadiusX="10" RadiusY="10" Cursor="Hand">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="20" Color="White" RenderingBias="Quality" ShadowDepth="1" />
-                </Rectangle.Effect>
-            </Rectangle>
-            <Grid Margin="25" Height="120">
-                <Grid Width="35" Height="50" Background="#FF777EA8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#FFD7D7D7" RenderingBias="Quality" ShadowDepth="1" />
-                    </Grid.Effect>
-                    <materialDesign:PackIcon Kind="File" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
-                </Grid>
-                <TextBlock Text="File AES" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 20">
-                    <TextBlock Text="0" x:Name="AESFileUsage" Margin="0 0 10 0" VerticalAlignment="Center" Foreground="gray" FontSize="50"/>
-                    <TextBlock Text="lần" Margin="0 5" VerticalAlignment="Bottom" Foreground="gray" FontSize="20"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20">
-                    <materialDesign:PackIcon Kind="Alert" Foreground="Red" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
-                    <TextBlock Text="Giới hạn 0 lần" x:Name="limitAESFile" FontSize="8" Foreground="#FF0096FF"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Column="2">
-            <Rectangle Height="120" Margin="20" Fill="#FFE7E7E7" RadiusX="10" RadiusY="10" Cursor="Hand">
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="20" Color="White" RenderingBias="Quality" ShadowDepth="1" />
-                </Rectangle.Effect>
-            </Rectangle>
-            <Grid Margin="25" Height="120">
-                <Grid Width="35" Height="50" Background="#FFA8DF8A" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#FFD7D7D7" RenderingBias="Quality" ShadowDepth="1" />
-                    </Grid.Effect>
-                    <materialDesign:PackIcon Kind="VerifiedUser" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
-                </Grid>
-                <TextBlock Text="Phiên bản" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top" Foreground="Gray"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 20">
-                    <TextBlock Text="1.0.0" VerticalAlignment="Center" Foreground="gray" FontSize="50"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20">
-                    <materialDesign:PackIcon Kind="Database" Foreground="CadetBlue" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
-                    <TextBlock Text="25/09/2020" FontSize="8" Foreground="#FF0096FF"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="580" Height="380">
-            <Grid Background="#FFE7E7E7" Margin="20 50 20 60">
+        
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="580" Height="380">
+            <Grid Background="#FFD9D9D9" Margin="20 50 20 60">
                 <Grid.OpacityMask>
                     <VisualBrush Visual="{ Binding ElementName=DataUsage }"/>
                 </Grid.OpacityMask>
-                <Border Background="#FFE7E7E7" x:Name="DataUsage" CornerRadius="5" />
+                <Border Background="{DynamicResource BorderColor}" x:Name="DataUsage" CornerRadius="5" />
                 <StackPanel VerticalAlignment="Bottom">
                     <TextBlock Text="Dữ liệu" Margin="10 0" Foreground="gray" FontSize="20"/>
                     <StackPanel Orientation="Horizontal" Margin="20 5">
                         <materialDesign:PackIcon Kind="ArrowUp" Foreground="CornflowerBlue" VerticalAlignment="Center" />
-                        <TextBlock Text="Bạn đã mã hóa 0 chuỗi và 0 file" x:Name="totalUseDesc" Margin="10 0" Foreground="gray" FontSize="15"/>
+                        <TextBlock Text="{Binding DataUsage.DescText}" x:Name="totalUseDesc" Margin="10 0" Foreground="gray" FontSize="15"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -227,13 +158,13 @@
                 <Grid.OpacityMask>
                     <VisualBrush Visual="{ Binding ElementName=DateUsageDesc }"/>
                 </Grid.OpacityMask>
-                <Border Background="#FF0096FF" x:Name="DateUsageDesc" CornerRadius="15" />
+                <Border Background="#FF000000" x:Name="DateUsageDesc" CornerRadius="15" />
 
                 <MetroChart:RadialGaugeChart Background="{x:Null}" ChartTitle="AESUsage" ChartSubTitle="" Foreground="LightGray" >
                     <MetroChart:RadialGaugeChart.Series>
                         <MetroChart:ChartSeries
                                         DisplayMember="title"
-                                        ItemsSource="{Binding Path=dataUsage}"
+                                        ItemsSource="{Binding DataUsage.encryptUsage}"
                                         SeriesTitle="AESUsage"
                                         ValueMember="percent" HorizontalAlignment="Center"/>
                     </MetroChart:RadialGaugeChart.Series>
@@ -242,13 +173,70 @@
 
         </Grid>
 
-        <Grid x:Name="LayoutRootOverlay" Grid.RowSpan="4" Panel.ZIndex="1" Visibility="Collapsed">
-            <!--<Grid x:Name="MODAL_WINDOW_BLUR" Background="{DynamicResource MODAL_WINDOW_BLUR_Background}" Opacity="0.8" />-->
-            <Grid x:Name="MODAL_WINDOW_ContentGrid" Width="Auto" Height="Auto" Background="Transparent">
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <ContentPresenter x:Name="MODAL_DIALOG" Grid.Row="1"/>
-                </ScrollViewer>
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0 10 0 0">
+            <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="2" CornerRadius="5" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="199*" />
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="199*" />
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="199*" />
+                    <ColumnDefinition Width="2" />
+                    <!--<ColumnDefinition Width="199*" />
+                    <ColumnDefinition Width="1" />-->
+                </Grid.ColumnDefinitions>
+                <GridSplitter Grid.Row="0" Grid.ColumnSpan="11" Height="1" HorizontalAlignment="Stretch" Background="{DynamicResource BorderColor}"/>
+                <StackPanel Grid.Row="1" Grid.Column="0" Background="{DynamicResource BackgroundColor}">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource local.VersioningTitleText}" Margin="24,30,0,0">MÃ HÓA CHUỖI</TextBlock>
+                    <WrapPanel Orientation="Horizontal"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="24,0,0,0">
+                        <TextBlock Style="{StaticResource local.VersioningNumText}" Text="{Binding DataUsage.AESStringUsage}" Name="AESStringUsage" Margin="0,8,4,0" />
+                    </WrapPanel>
+                    <TextBlock Style="{StaticResource local.VersioningText}" Text="{Binding limitAESString}" Margin="24,8,0,0" ToolTip="{StaticResource whatIsLimit}"/>
+                </StackPanel>
+                <GridSplitter Grid.Row="1" Grid.Column="1" Width="1" HorizontalAlignment="Stretch" Background="{DynamicResource BorderColor}"/>
+                <StackPanel Grid.Row="1" Grid.Column="2" Background="{DynamicResource BackgroundColor}">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource local.VersioningTitleText}" Margin="24,30,0,0">MÃ HÓA FILE</TextBlock>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="24,0,0,0">
+                        <TextBlock Style="{StaticResource local.VersioningNumText}" Text="{Binding DataUsage.AESFileUsage}" Margin="0,8,4,0" />
+                    </WrapPanel>
+                    <TextBlock Style="{StaticResource local.VersioningText}" Text="{Binding limitAESFile}" Margin="24,8,0,0" ToolTip="{StaticResource whatIsLimit}"/>
+                </StackPanel>
+                <GridSplitter Grid.Row="1" Grid.Column="3" Width="1" HorizontalAlignment="Stretch" Background="{DynamicResource BorderColor}"/>
+                <StackPanel Grid.Row="1" Grid.Column="4" Background="{DynamicResource BackgroundColor}">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource local.VersioningTitleText}" Margin="24,30,0,0">PHIÊN BẢN</TextBlock>
+                    <WrapPanel Orientation="Horizontal"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="24,0,0,0">
+                        <TextBlock Style="{StaticResource local.VersioningNumText}" Margin="0,8,4,0" Text="{Binding DevelopmentDetail.CurrentVersion}" />
+                    </WrapPanel>
+                    <TextBlock Style="{StaticResource local.VersioningText}"  Margin="24,8,0,0" Text="Phiên bản mới nhất" ToolTip="{StaticResource versioningCheckQuestion}"/>
+                </StackPanel>
+                <GridSplitter Grid.Row="2" Grid.ColumnSpan="11" Height="1" HorizontalAlignment="Stretch" Background="{DynamicResource BorderColor}" Visibility="Visible"/>
             </Grid>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Height="Auto" VerticalAlignment="Bottom" Margin="0,0,0,32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <common:CurrentSession
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                />
+            <common:UsageStats
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                />
         </Grid>
     </Grid>
 </UserControl>

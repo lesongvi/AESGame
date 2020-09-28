@@ -4,29 +4,112 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AESGame.Views"
+             xmlns:viewModels="clr-namespace:AESGame.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <!--<Image Source="/Resources/crypto_info_bg.png" Stretch="Fill" Margin="-60">
-            <Image.Effect>
-                <BlurEffect KernelType="Gaussian" Radius="10" />
-            </Image.Effect>
-        </Image>-->
-        <Border CornerRadius="60" Margin="30" Background="#7F000000">
-            <Grid x:Name="TeamInfo_List" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Rectangle Height="120" Margin="20" Fill="#FFE7E7E7" RadiusX="10" RadiusY="10">
-                    <Rectangle.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="White" RenderingBias="Quality" ShadowDepth="1" />
-                    </Rectangle.Effect>
-                </Rectangle>
-                <Grid Margin="25" Height="120">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="1. Song Vĩ - MSSV: 1811061712" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Top"/>
-                        <TextBlock Text="2. Bảo Bo - MSSV: 18..." HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-                        <TextBlock Text="3. Hoàng Tình - MSSV: 19..." HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Bottom"/>
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </Border>
-    </Grid>
+    <UserControl.DataContext>
+        <viewModels:MainVM />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}" x:Key="BrandingButtonBase">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrands}" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource PrimaryColorBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style BasedOn="{StaticResource BrandingButtonBase}" TargetType="{x:Type Button}" x:Key="facebookBtn">
+            <Setter Property="Content" Value="&#xf39e;" />
+            <Setter Property="FontSize" Value="17" />
+        </Style>
+        <Style BasedOn="{StaticResource BrandingButtonBase}" TargetType="{x:Type Button}" x:Key="instagramBtn">
+            <Setter Property="Content" Value="&#xf16d;" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style BasedOn="{StaticResource BrandingButtonBase}" TargetType="{x:Type Button}" x:Key="twitterBtn">
+            <Setter Property="Content" Value="&#xf099;" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style BasedOn="{StaticResource BrandingButtonBase}" TargetType="{x:Type Button}" x:Key="youtubeBtn">
+            <Setter Property="Content" Value="&#xf167;" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style BasedOn="{StaticResource BrandingButtonBase}" TargetType="{x:Type Button}" x:Key="githubBtn">
+            <Setter Property="Content" Value="&#xf09b;" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style BasedOn="{StaticResource BrandingButtonBase}" TargetType="{x:Type Button}" x:Key="redditBtn">
+            <Setter Property="Content" Value="&#xf281;" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+    </UserControl.Resources>
+    <StackPanel>
+        <Grid Width="154" Height="40" Grid.Row="1" HorizontalAlignment="Left" Margin="16,32,0,0" Background="{DynamicResource ViBigLogo}" />
+        <TextBlock Text="{StaticResource viTextAbout}" Style="{StaticResource FontsTypography.Caption-Primary}" Margin="16,16,16,0" TextWrapping="Wrap" x:Name="tbl_aboutText" />
+        <StackPanel Margin="16,16,0,0" Orientation="Vertical">
+            <Label Content="Thông tin phiên bản" Style="{StaticResource FontsTypography.Heading3/Secondary}" Padding="0,5,0,5" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Software Version: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
+                <TextBlock x:Name="tbl_localVer" Text="{Binding LocalVersion}" Style="{StaticResource FontsTypography.Caption-Primary}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="API Version: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
+                <TextBlock x:Name="tbl_onlineVer" Text="{Binding OnlineVersion}" Style="{StaticResource FontsTypography.Caption-Primary}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="16,16,0,0" Orientation="Vertical">
+            <Label Content="Thông tin team" Style="{StaticResource FontsTypography.Heading3/Secondary}" Padding="0,5,0,5" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{StaticResource memNum1}" Style="{StaticResource FontsTypography.Caption-Primary}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{StaticResource memNum2}" Style="{StaticResource FontsTypography.Caption-Primary}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{StaticResource memNum3}" Style="{StaticResource FontsTypography.Caption-Primary}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="16,10,0,8" Orientation="Vertical">
+            <Label Content="Resources" Style="{StaticResource FontsTypography.Heading3/Secondary}" Padding="0,5,0,5"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Trang web: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://maxmines.com" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none">maxmines.com</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Blog: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://www.nicehash.com/blog" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none">blog.error.vn</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Support: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://help.error.vn" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none">help.error.vn</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Status: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://lesongvi.github.io" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none">lesongvi.github.io</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="16,10,0,0" Orientation="Vertical">
+            <Label Content="Social" Style="{StaticResource FontsTypography.Heading3/Secondary}" Padding="0,5,0,5"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btn_facebook" Click="btn_social_Click" Style="{StaticResource facebookBtn}" Margin="0,0,20,0"/>
+                <Button x:Name="btn_instagram" Click="btn_social_Click" Style="{StaticResource instagramBtn}" Margin="0,0,20,0"/>
+                <Button x:Name="btn_twitter" Click="btn_social_Click" Style="{StaticResource twitterBtn}" Margin="0,0,20,0"/>
+                <Button x:Name="btn_youtube" Click="btn_social_Click" Style="{StaticResource youtubeBtn}" Margin="0,0,20,0"/>
+                <Button x:Name="btn_github" Click="btn_social_Click" Style="{StaticResource githubBtn}" Margin="0,0,20,0"/>
+                <Button x:Name="btn_reddit" Click="btn_social_Click" Style="{StaticResource redditBtn}" Margin="0,0,20,0"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

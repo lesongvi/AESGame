@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:AESGame.Views"
+             xmlns:viewModels="clr-namespace:AESGame.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModels:MainVM />
+    </UserControl.DataContext>
     <UserControl.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseUbuntuTextBlock}" x:Key="local.SettingTitle">
             <Setter Property="FontSize" Value="20" />
@@ -153,111 +157,10 @@
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="20 5" VerticalAlignment="Center">
                 <materialDesign:PackIcon Kind="ArrowUp" Foreground="CornflowerBlue" VerticalAlignment="Center" />
-                <TextBlock Foreground="{StaticResource NastyGreenBrush}" Style="{StaticResource BaseUbuntuTextBlockBold}" Text="0%" x:Name="percent" FontSize="15"/>
-                <TextBlock Foreground="{StaticResource NastyGreenBrush}" Style="{StaticResource BaseUbuntuTextBlockBold}" Text="Bạn đã mã hóa 0 chuỗi trong tổng số 0 lần" x:Name="TextDownNotice" Margin="20 0" FontSize="15"/>
+                <TextBlock Foreground="{StaticResource NastyGreenBrush}" Style="{StaticResource BaseUbuntuTextBlockBold}" Text="{Binding DataUsage.AESStringPerc, Mode=OneWay}" FontSize="15"/>
+                <TextBlock Foreground="{StaticResource NastyGreenBrush}" Style="{StaticResource BaseUbuntuTextBlockBold}" Text="{Binding DataUsage.AESStringDesc, Mode=OneWay}" Margin="20 0" FontSize="15"/>
             </StackPanel>
 
         </Grid>
-
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="200" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="580" Height="380">
-            <Grid Background="#FFE7E7E7" Margin="20 50 20 25">
-                <Grid.OpacityMask>
-                    <VisualBrush Visual="{ Binding ElementName=DataUsage }"/>
-                </Grid.OpacityMask>
-                <Border Background="#FFE7E7E7" x:Name="DataUsage" CornerRadius="5" />
-                <StackPanel VerticalAlignment="Bottom">
-                    <TextBlock Text="Dữ liệu" Margin="10 0" Foreground="gray" FontSize="20"/>
-                    <StackPanel Orientation="Horizontal" Margin="20 5">
-                        <materialDesign:PackIcon Kind="ArrowUp" Foreground="CornflowerBlue" VerticalAlignment="Center" />
-                        <TextBlock Text="0%" x:Name="percent" Foreground="gray" FontSize="15"/>
-                        <TextBlock Text="Bạn đã mã hóa 0 chuỗi trong tổng số 0 lần" x:Name="TextDownNotice" Margin="20 0" Foreground="gray" FontSize="15"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10 5">
-                        <materialDesign:PackIcon Kind="DateRange" Foreground="Gray" VerticalAlignment="Center"/>
-                        <TextBlock Text="Lượt sử dụng của bạn được reset mỗi 24h" Margin="5 0" Foreground="Gray" FontSize="15"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-            <Grid Margin="50 50 50 85">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="Nhập chữ cần mã hóa hoặc giải mã" Margin="5"/>
-                        <Label Grid.Column="1" Content="Nhập salt" Margin="5"/>
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Border Margin="0 0 5 0" Grid.Column="0" Background="#FF93C8C0" CornerRadius="15">
-                            <TextBox Name="AESEncryptText" Style="{StaticResource inputBox}" Margin="5" BorderBrush="Black"/>
-                        </Border>
-                        <Border Margin="5 0 0 0" Grid.Column="1" Background="#FF93C8C0" CornerRadius="15">
-                            <TextBox Name="Salt" Margin="5" BorderBrush="Black"/>
-                        </Border>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Kết quả" Margin="5"/>
-                    <Border Grid.Row="1"  Background="#FF9EC893" CornerRadius="15">
-                        <TextBox Name="AESResults" Margin="5" BorderBrush="Black" IsReadOnly="True"/>
-                    </Border>
-                </Grid>
-
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button Grid.Column="0" Style="{StaticResource BigButtonPrimary}" Width="200" Height="35" Click="AESStringEncrypt_OnClick">
-                        <Grid Width="150">
-                            <materialDesign:PackIcon Kind="LockAlert" VerticalAlignment="Center"/>
-                            <TextBlock HorizontalAlignment="Center" Text="Mã hóa" />
-                        </Grid>
-                    </Button>
-
-                    <Button Grid.Column="1" Style="{StaticResource BigButtonPrimary}" Width="200" Height="35" Click="AESStringDecrypt_OnClick">
-                        <Grid Width="150">
-                            <materialDesign:PackIcon Kind="FreeBreakfast" VerticalAlignment="Center"/>
-                            <TextBlock HorizontalAlignment="Center" Text="Giải mã" />
-                        </Grid>
-                    </Button>
-                </Grid>
-            </Grid>
-
-        </Grid>-->
     </Grid>
 </UserControl>
