@@ -117,7 +117,7 @@
     <Compile Include="Core\ApplicationState\SessionDetail.cs" />
     <Compile Include="Core\ApplicationState\VersionState.cs" />
     <Compile Include="Core\Configs\ConfigManager.cs" />
-    <Compile Include="Core\Configs\Data\GeneralConfig.cs.cs" />
+    <Compile Include="Core\Configs\Data\GeneralConfig.cs" />
     <Compile Include="Core\Utils\Helpers.cs" />
     <Compile Include="Core\Utils\Links.cs" />
     <Compile Include="Core\Utils\PInvokeHelpers.cs" />
