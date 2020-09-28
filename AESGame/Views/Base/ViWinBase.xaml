@@ -70,7 +70,6 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <!--TitleBar-->
                             <Grid x:Name="PART_HeaderBar">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

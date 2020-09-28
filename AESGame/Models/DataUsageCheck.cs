@@ -60,6 +60,11 @@ namespace AESGame.Models
             return JsonConvert.DeserializeObject<UsageDetail>(requestMe("action", "_deFile"));
         }
 
+        public BlogDetail BlogNotification()
+        {
+            return JsonConvert.DeserializeObject<BlogDetail>(requestMe("blog", null));
+        }
+
         public string requestMe(string _method, string _action)
         {
             var usageData = new Data();

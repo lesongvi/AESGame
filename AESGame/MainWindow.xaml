@@ -50,6 +50,15 @@
             <TabItem Header="Thông tin" Name="TeamInfoButton">
                 <opv:TeamInfo DataContext="{Binding .}" />
             </TabItem>
+            <!--<TabItem Header="LEFT_SETTINGS" Name="SettingsButton">
+                <settingsNew:Settings DataContext="{Binding .}"/>
+            </TabItem>-->
+            <TabItem Header="LEFT_NOTIFICATIOS" Name="NotificationsButton">
+                <opv:Notifications DataContext="{Binding .}"/>
+            </TabItem>
+            <!--<TabItem Header="LEFT_HELP" Name="HelpButton">
+                <help:Help DataContext="{Binding .}" />
+            </TabItem>-->
         </TabControl>
 
         <tb:TaskbarIcon Grid.Row="0"

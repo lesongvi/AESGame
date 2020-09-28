@@ -241,6 +241,10 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
+                                    <ToggleButton x:Name="NotificationsButton" Style="{DynamicResource bellWindowStyle}"
+                                            Grid.Column="1"
+                                            Margin="0,0,14,0"/>
+
                                     <Button x:Name="MinimizeButton" Style="{StaticResource minimizeWindowStyle}"
                                             Grid.Column="2"
                                             Margin="0,0,15,0"/>

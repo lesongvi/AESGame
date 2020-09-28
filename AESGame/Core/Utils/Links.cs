@@ -10,6 +10,7 @@ namespace AESGame.Core.Utils
     {
         public const string MyUSAGE_PRODUCTION = "https://api.rqn9.com/data/1.0/dapp/_/182230003154961/my/usage/{MY_IP}";
         public const string VisitUrl_PRODUCTION = "https://maxmines.com";
+        public const string DevHelp_PRODUCTION = "https://maxmines.com/contact";
 
         public static string VisitUrl
         {
@@ -24,6 +25,14 @@ namespace AESGame.Core.Utils
             get
             {
                 return MyUSAGE_PRODUCTION;
+            }
+        }
+
+        public static string MaxMinesVDevHelp
+        {
+            get
+            {
+                return DevHelp_PRODUCTION;
             }
         }
     }

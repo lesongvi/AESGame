@@ -31,50 +31,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="40,16,0,16">
             <WrapPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                <TextBlock Style="{StaticResource BaseUbuntuTextBlock}" Foreground="{DynamicResource TextColorBrush}" FontSize="14">Mã hóa file:</TextBlock>
-                <Button Margin="4,0,0,0" Style="{StaticResource ButtonNoBorder}">
-                    <Button.ContextMenu>
-                        <ContextMenu x:Name="AESStringPage">
-                            <ContextMenu.Template>
-                                <ControlTemplate>
-                                    <StackPanel>
-                                        <Grid >
-                                            <Border Background="{DynamicResource BackgroundColor}" BorderBrush="{DynamicResource BorderColor}" BorderThickness="1" CornerRadius="4" />
-                                            <StackPanel>
-                                                <Button Padding="16,7,16,7" Style="{StaticResource ContextMenuButton}"/>
-                                                <Separator Background="{DynamicResource BorderColor}"/>
-                                                <Button Padding="16,7,16,7" Style="{StaticResource ContextMenuButton}"/>
-                                                <Separator Background="{DynamicResource BorderColor}"/>
-                                                <Button Padding="16,7,16,7" Style="{StaticResource ContextMenuButton}"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
-                                </ControlTemplate>
-                            </ContextMenu.Template>
-                        </ContextMenu>
-                    </Button.ContextMenu>
-                    <TextBlock Foreground="{StaticResource PrimaryColorBrush}" FontSize="14" LineHeight="1.57">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource BaseUbuntuTextBlockBold}">
-                                <Style.Triggers>
-                                    <Trigger Property ="IsMouseOver" Value="True">
-                                        <Setter Property="TextDecorations">
-                                            <Setter.Value>
-                                                <TextDecorationCollection>
-                                                    <TextDecoration Location="Underline" PenOffset="2">
-                                                        <TextDecoration.Pen>
-                                                            <Pen Thickness="1" Brush="{StaticResource PrimaryColorBrush}"></Pen>
-                                                        </TextDecoration.Pen>
-                                                    </TextDecoration>
-                                                </TextDecorationCollection>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Button>
+                <Label Content="Mã hóa file" Margin="12,0,0,0" Style="{StaticResource FontsTypography.Heading3/Secondary}" />
             </WrapPanel>
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >

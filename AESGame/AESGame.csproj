@@ -118,6 +118,12 @@
     <Compile Include="Core\ApplicationState\VersionState.cs" />
     <Compile Include="Core\Configs\ConfigManager.cs" />
     <Compile Include="Core\Configs\Data\GeneralConfig.cs" />
+    <Compile Include="Core\Notifications\INotificationBaseAction.cs" />
+    <Compile Include="Core\Notifications\Notification.cs" />
+    <Compile Include="Core\Notifications\NotificationAction.cs" />
+    <Compile Include="Core\Notifications\NotificationsGroup.cs" />
+    <Compile Include="Core\Notifications\NotificationsManager.cs" />
+    <Compile Include="Core\Notifications\NotificationsType.cs" />
     <Compile Include="Core\Utils\Helpers.cs" />
     <Compile Include="Core\Utils\Links.cs" />
     <Compile Include="Core\Utils\PInvokeHelpers.cs" />
@@ -129,6 +135,7 @@
     <Compile Include="Models\AESPasswordHash.cs" />
     <Compile Include="Models\AESStringEngine.cs" />
     <Compile Include="Models\AESUsage.cs" />
+    <Compile Include="Models\BlogDetail.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\DataUsageCheck.cs" />
     <Compile Include="Models\encryptUsageViewModel.cs" />
@@ -166,8 +173,15 @@
       <DependentUpon>UsageStats.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\WindowUtils.cs" />
+    <Compile Include="Views\Converters\NewVisibilityConverter.cs" />
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationItem.xaml.cs">
+      <DependentUpon>NotificationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TeamInfo.xaml.cs">
       <DependentUpon>TeamInfo.xaml</DependentUpon>
@@ -365,6 +379,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NotificationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Notifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

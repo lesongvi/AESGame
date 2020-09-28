@@ -23,7 +23,8 @@ namespace AESGame.Views.Base
             HomePageButton,
             AESStringButton,
             AESFileButton,
-            TeamInfoButton
+            TeamInfoButton,
+            NotificationsButton
         };
 
         private ToggleButtonType? _lastSelected;

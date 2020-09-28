@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AESGame.Core.Notifications;
+using AESGame.Core.Utils;
 using AESGame.Models;
 using AESGame.ViewModels;
 using AESGame.Views.Base;
@@ -81,6 +84,23 @@ namespace AESGame
                 LoadingBar.Visibility = Visibility.Collapsed;
                 IsEnabled = true;
                 SetTabButtonsEnabled();
+                addNotification();
+            }
+        }
+
+        private void addNotification()
+        {
+            var u = new DataUsageCheck();
+            var dataBlog = u.BlogNotification();
+            foreach(var item in dataBlog.data)
+            {
+                var notification = new Notification(NotificationsType.Info, NotificationsGroup.VisUpdate, item.title, item.content);
+                notification.Actions.Add(new NotificationAction
+                {
+                    Info = "Chi tiết",
+                    Action = () => { Process.Start(item.blogUri); }
+                });
+                NotificationsManager.Instance.AddNotificationToList(notification);
             }
         }
 
