@@ -204,7 +204,7 @@ namespace AESGame.Models
                 case 32:
                     return 256;
                 default:
-                    return 1024;
+                    return 0;
             }
         }
 

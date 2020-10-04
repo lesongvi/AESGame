@@ -5,6 +5,6 @@
     <system:String x:Key="whatIsLimit">Bạn đang sử dụng gói miễn phí!</system:String>
     <system:String x:Key="versioningCheckQuestion">Phiên bản mới nhật được release trên trang chủ!</system:String>
     <system:String x:Key="memNum1">1. Song Vĩ - MSSV: 1811061712</system:String>
-    <system:String x:Key="memNum2">2. Bảo Bo - MSSV: 18...</system:String>
-    <system:String x:Key="memNum3">3. Hoàng Tình - MSSV: 19...</system:String>
+    <system:String x:Key="memNum2">2. Bảo Bo - MSSV: 1811061370</system:String>
+    <system:String x:Key="memNum3">3. Hoàng Tình - MSSV: 1911062270</system:String>
 </ResourceDictionary>

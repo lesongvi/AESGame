@@ -75,7 +75,7 @@ namespace AESGame.Models
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://api.rqn9.com/data/1.0/dapp/_/182230003154961/usage/");
+            client.BaseAddress = new Uri("https://api.rqn9.com/data/1.0/dapp/_/182230003154961/usage/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));

@@ -16,7 +16,7 @@
         Height="600" 
         Width="1024"
         MinHeight="500" MinWidth="540"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"

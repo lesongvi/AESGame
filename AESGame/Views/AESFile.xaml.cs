@@ -27,11 +27,12 @@ namespace AESGame.Views
     {
         //E:\BMTT\Debug, 111111111111111111111111 - For debug
 
-        AESStringEngine aesStringInstance;
-        DataUsageCheck usageCheck;
-        UsageDetail usage;
-        VConfig config;
+        private AESStringEngine aesStringInstance;
+        private DataUsageCheck usageCheck;
+        private UsageDetail usage;
+        private VConfig config;
         public string txtFile;
+        private static Random random = new Random();
         public AESFile()
         {
             InitializeComponent();
@@ -41,17 +42,31 @@ namespace AESGame.Views
             usage = usageCheck.initData();
 
             DataContextChanged += AESFile_DataContextChanged;
+            SaltTitle.MouseLeftButtonDown += new MouseButtonEventHandler(SaltTitle_MouseLeftButtonDown);
+        }
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private void SaltTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            int[] varMe = { 16, 24, 32 };
+            for (int i = 0; i < varMe.Length; i++)
+            {
+                if (Salt.Text.Length < varMe[i])
+                {
+                    Salt.Text = RandomString(varMe[i]);
+                    break;
+                }
+            }
         }
 
         private void AESFile_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            /*if (e.NewValue is MainVM mainVM)
-            {
-                Console.WriteLine(e.NewValue);
-                _vm = mainVM;
-                return;
-            }
-            throw new Exception("AESFile_DataContextChanged " + e.NewValue  + " must be of type MainVM");*/
+            //Silent is golden
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

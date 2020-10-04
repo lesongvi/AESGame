@@ -78,7 +78,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Margin="30 0 0 10" VerticalAlignment="Top">
-                        <TextBlock Style="{StaticResource local.SettingTitle}" Text="Salt input " />
+                        <TextBlock Style="{StaticResource local.SettingTitle}" Name="SaltTitle" Text="Salt input " />
                         <TextBlock Style="{StaticResource local.SettingDetail}" Text="Nhập khóa salt" TextWrapping="Wrap"/>
                     </StackPanel>
                     <TextBox Grid.Row="1" Width="Auto" Name="Salt" Style="{StaticResource inputBox}" Margin="30 0 30 5" BorderBrush="Black"/>

@@ -78,7 +78,7 @@
                 <TextBlock Text="{StaticResource memNum3}" Style="{StaticResource FontsTypography.Caption-Primary}"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Margin="16,10,0,8" Orientation="Vertical">
+        <!--<StackPanel Margin="16,10,0,8" Orientation="Vertical">
             <Label Content="Resources" Style="{StaticResource FontsTypography.Heading3/Secondary}" Padding="0,5,0,5"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Trang web: " Style="{StaticResource FontsTypography.Caption-Primary}"/>
@@ -115,6 +115,6 @@
                 <Button x:Name="btn_github" Click="btn_social_Click" Style="{StaticResource githubBtn}" Margin="0,0,20,0"/>
                 <Button x:Name="btn_reddit" Click="btn_social_Click" Style="{StaticResource redditBtn}" Margin="0,0,20,0"/>
             </StackPanel>
-        </StackPanel>
+        </StackPanel>-->
     </StackPanel>
 </UserControl>

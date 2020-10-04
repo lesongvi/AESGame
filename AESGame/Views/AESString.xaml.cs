@@ -26,10 +26,11 @@ namespace AESGame.Views
     {
         //vi, 111111111111111111111111, hZTbU6PNwgTcdwSqFaysgg== - for Debug
 
-        AESStringEngine aesStringInstance;
-        DataUsageCheck usageCheck;
-        UsageDetail usage;
-        VConfig config;
+        private AESStringEngine aesStringInstance;
+        private DataUsageCheck usageCheck;
+        private UsageDetail usage;
+        private VConfig config;
+        private static Random random = new Random();
         public AESString()
         {
             InitializeComponent();
@@ -39,6 +40,26 @@ namespace AESGame.Views
             usage = usageCheck.initData();
 
             DataContextChanged += AESString_DataContextChanged;
+            SaltTitle.MouseLeftButtonDown += new MouseButtonEventHandler(SaltTitle_MouseLeftButtonDown);
+        }
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private void SaltTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            int[] varMe = { 16, 24, 32 };
+            for(int i = 0; i< varMe.Length; i++)
+            {
+                if(Salt.Text.Length < varMe[i])
+                {
+                    Salt.Text = RandomString(varMe[i]);
+                    break;
+                }
+            }
         }
 
         private void AESString_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

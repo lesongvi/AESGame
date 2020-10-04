@@ -17,7 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DrawingBrush x:Key="ViLogo" Drawing="{DynamicResource ViLogoLight}" />
-            <DrawingBrush x:Key="ViBigLogo" Drawing="{DynamicResource ViLogoBigLight}" />
+            <DrawingBrush x:Key="ViBigLogo" Drawing="{DynamicResource ViLogoLight}" />
 
             <DrawingBrush x:Key="QrLightLogo" Drawing="{DynamicResource QrIconDefault}" />
             <DrawingBrush x:Key="QrDarkLogo" Drawing="{DynamicResource QRIcon}" />
