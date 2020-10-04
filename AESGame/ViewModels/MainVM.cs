@@ -57,6 +57,6 @@ namespace AESGame.ViewModels
         public string limitAESString => "Giới hạn " + config.limitAESString + " lần";
         public string limitAESFile => "Giới hạn " + config.limitAESFile + " lần";
         public string LocalVersion => VersionState.Instance.ProgramVersion.ToString();
-        public string OnlineVersion => VersionState.Instance.OnlineVersion?.ToString() ?? "N/A";
+        public string OnlineVersion => VersionState.Instance.OnlineVersion?.ToString() ?? "1.0";
     }
 }

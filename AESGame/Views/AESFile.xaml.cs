@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -153,13 +154,24 @@ namespace AESGame.Views
                     CustomDialogManager.ShowModalDialog(errorMessageShow);
                 }
             }
+            catch (CryptographicException err)
+            {
+                AESResults.Text = "";
+                var errorMessageShow = new CustomDialog()
+                {
+                    Title = "Lỗi!",
+                    Description = "Độ lớn của dữ liệu giải mã không hợp lệ!",
+                    OkText = "Được",
+                    AnimationVisible = Visibility.Collapsed
+                };
+            }
             catch (Exception err)
             {
                 AESResults.Text = "";
                 var errorMessageShow = new CustomDialog()
                 {
                     Title = "Lỗi!",
-                    Description = "Lỗi! Chi tiết lỗi: " + err,
+                    Description = "Chi tiết lỗi: " + err,
                     OkText = "Được",
                     AnimationVisible = Visibility.Collapsed
                 };

@@ -13,7 +13,7 @@ namespace AESGame.Models
 {
     public class DataUsageCheck
     {
-        string pcIp = new System.Net.WebClient().DownloadString("https://api.ipify.org");
+        string pcIp = getMyIp();
         public int AESStringUsage 
         {
             set;
@@ -65,11 +65,28 @@ namespace AESGame.Models
             return JsonConvert.DeserializeObject<BlogDetail>(requestMe("blog", null));
         }
 
+        public static string getMyIp()
+        {
+            try
+            {
+                return new System.Net.WebClient().DownloadString("https://api.ipify.org");
+            }
+            catch (Exception e)
+            {
+                return "0.0.0.0";
+            }
+        }
+
         public string requestMe(string _method, string _action)
         {
             var usageData = new Data();
             usageData.ip = pcIp;
             usageData.action = _action;
+
+            if(usageData.ip == "0.0.0.0")
+            {
+                return "{\"success\": " + false + ", \"message\": {\"code\":" + 503 + ", \"detail\": \"Vui lòng kiểm tra kết nối mạng của bạn!\"}}"; ;
+            }
 
             var json = JsonConvert.SerializeObject(usageData);
             var data = new StringContent(json, Encoding.UTF8, "application/json");

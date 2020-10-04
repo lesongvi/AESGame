@@ -139,6 +139,7 @@
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\DataUsageCheck.cs" />
     <Compile Include="Models\encryptUsageViewModel.cs" />
+    <Compile Include="Models\MessageErr.cs" />
     <Compile Include="Models\SessionMk.cs" />
     <Compile Include="Models\SimpleConverter.cs" />
     <Compile Include="Models\UsageDetail.cs" />

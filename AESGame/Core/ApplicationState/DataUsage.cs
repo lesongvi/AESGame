@@ -32,7 +32,7 @@ namespace AESGame.Core.ApplicationState
             hashme = new AESUsage(usage);
             encryptUsage = new encryptUsageViewModel(hashme).dataUsage;
             DescText = "Bạn đã mã hóa " + usage.string_usage + " chuỗi và " + usage.file_usage + " file";
-            AESStringDesc = "Bạn đã mã hóa " + usage.string_usage + " chuỗi trong " + usage.total_usage + " lần";
+            AESStringDesc = "Bạn đã mã hóa " + usage.string_usage  + " chuỗi trong " + usage.total_usage + " lần";
             AESFileDesc = "Bạn đã mã hóa " + usage.file_usage + " file trong " + usage.total_usage + " lần";
             AESStringPerc = Math.Round(((double)usage.string_usage / usage.total_usage * 100), 2) + "%";
             AESFilePerc = Math.Round(((double)usage.file_usage / usage.total_usage * 100), 2) + "%";

@@ -11,7 +11,18 @@ namespace AESGame.Core.ApplicationStateManager
     static partial class ApplicationStateManager
     {
         public static DispatcherObject App { get; set; }
-        public static string pcIp = new System.Net.WebClient().DownloadString("https://api.ipify.org");
+        public static string pcIp = getMyIp();
+
+        public static string getMyIp()
+        {
+            try
+            {
+                return new System.Net.WebClient().DownloadString("https://api.ipify.org");
+            } catch(Exception e)
+            {
+                return "0.0.0.0";
+            }
+        } 
         public enum SetResult
         {
             INVALID = 0,

@@ -18,7 +18,7 @@ namespace AESGame.Models
 
         private double CalculatePercentUsage(UsageDetail u)
         {
-            return u.total_usage > .0 ? ((double)u.string_usage / u.total_usage * 100) : 0;
+            return u.total_usage > .0 ? ((double)(u.string_usage + u.file_usage) / u.total_usage * 100) : 0;
         }
     }
 }
