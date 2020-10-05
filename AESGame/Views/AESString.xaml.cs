@@ -41,6 +41,7 @@ namespace AESGame.Views
 
             DataContextChanged += AESString_DataContextChanged;
             SaltTitle.MouseLeftButtonDown += new MouseButtonEventHandler(SaltTitle_MouseLeftButtonDown);
+            StringInputTitle.MouseLeftButtonDown += new MouseButtonEventHandler(StringInputTitle_MouseLeftButtonDown);
         }
         public static string RandomString(int length)
         {
@@ -60,6 +61,12 @@ namespace AESGame.Views
                     break;
                 }
             }
+        }
+
+        private void StringInputTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            AESEncryptText.Text = RandomString(random.Next(1904));
         }
 
         private void AESString_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

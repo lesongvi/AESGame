@@ -53,7 +53,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Margin="30 0 0 0" VerticalAlignment="Top">
-                        <TextBlock Style="{StaticResource local.SettingTitle}" Text="String input " />
+                        <TextBlock Style="{StaticResource local.SettingTitle}" Name="StringInputTitle" Text="String input " />
                         <TextBlock Style="{StaticResource local.SettingDetail}" Text="Nhập chuỗi mà bạn muốn mã hóa hoặc giải mã" TextWrapping="Wrap"/>
                     </StackPanel>
                     <TextBox Width="Auto" Grid.Row="1" Name="AESEncryptText" Style="{StaticResource inputBox}" Margin="30 0 5 0" BorderBrush="Black"/>
